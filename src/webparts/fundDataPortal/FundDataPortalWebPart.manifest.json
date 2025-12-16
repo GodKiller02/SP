@@ -1,0 +1,21 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/spfx/client-side-web-part-manifest.schema.json",
+  "id": "0d4b1c0b-6a6f-4b31-8c10-6b513c0b5c87",
+  "alias": "FundDataPortalWebPart",
+  "componentType": "WebPart",
+  "version": "0.0.1",
+  "manifestVersion": 2,
+  "requiresCustomScript": false,
+  "supportedHosts": ["SharePointWebPart", "SharePointFullPage", "TeamsPersonalApp", "TeamsTab"],
+  "supportsThemeVariants": true,
+  "preconfiguredEntries": [
+    {
+      "title": { "default": "Fund Data Portal" },
+      "description": { "default": "SPA-style fund data portal demo" },
+      "officeFabricIconFontName": "FinancialSolid",
+      "properties": {
+        "title": "Fund Data Portal"
+      }
+    }
+  ]
+}

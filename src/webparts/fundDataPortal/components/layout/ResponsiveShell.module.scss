@@ -1,0 +1,66 @@
+.shell {
+  width: 100%;
+  min-height: 100%;
+}
+
+.topBar {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+}
+
+.titleRow {
+  padding: 12px 16px;
+}
+
+.title {
+  display: block;
+}
+
+.subtitle {
+  display: block;
+  margin-top: 4px;
+}
+
+.body {
+  display: grid;
+  grid-template-columns: 280px 1fr;
+  gap: 0;
+  min-height: calc(100vh - 110px);
+}
+
+.leftNav {
+  border-right: 1px solid #e1dfdd;
+  background: #ffffff;
+  padding: 12px 8px;
+}
+
+.content {
+  padding: 16px;
+}
+
+.contentInner {
+  max-width: 1200px;
+}
+
+.mobileLinkRow {
+  padding: 4px 0;
+}
+
+.mobileLinkText {
+  cursor: pointer;
+}
+
+@media (max-width: 1024px) {
+  .body {
+    grid-template-columns: 1fr;
+  }
+
+  .leftNav {
+    display: none;
+  }
+
+  .content {
+    padding: 12px;
+  }
+}

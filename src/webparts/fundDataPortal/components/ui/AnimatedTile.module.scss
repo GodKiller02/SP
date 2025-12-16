@@ -1,0 +1,23 @@
+.tile {
+  border-radius: 8px;
+  padding: 14px;
+  cursor: pointer;
+  user-select: none;
+  height: 100%;
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.title {
+  font-weight: 600;
+}
+
+.desc {
+  display: block;
+  margin-top: 8px;
+  color: #605e5c;
+}
