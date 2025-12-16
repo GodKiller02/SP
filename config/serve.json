@@ -6,15 +6,24 @@
     "default": {
       "pageUrl": "https://{tenantDomain}/_layouts/15/workbench.aspx",
       "customActions": {
-        "fund-data-portal-web-part": {
-          "location": "ClientSideExtension.ApplicationCustomizer",
-          "properties": {}
+        "0d4b1c0b-6a6f-4b31-8c10-6b513c0b5c87": {
+          "location": "ClientSideWebPart",
+          "properties": {
+            "title": "Fund Data Portal"
+          }
         }
       }
     },
     "localWorkbench": {
       "pageUrl": "https://{tenantDomain}/_layouts/15/workbench.aspx",
-      "customActions": {}
+      "customActions": {
+        "0d4b1c0b-6a6f-4b31-8c10-6b513c0b5c87": {
+          "location": "ClientSideWebPart",
+          "properties": {
+            "title": "Fund Data Portal"
+          }
+        }
+      }
     }
   }
 }

@@ -1,0 +1,14 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/spfx-build/copy-static-assets.schema.json",
+  "includeExtensions": [
+    "woff",
+    "woff2",
+    "ttf",
+    "eot",
+    "svg",
+    "png",
+    "jpg",
+    "jpeg",
+    "gif"
+  ]
+}
