@@ -1,22 +1,20 @@
 import * as React from 'react';
-import { Stack, Text } from '@fluentui/react';
 import { useNavigate } from 'react-router-dom';
 import AnimatedTile from '../ui/AnimatedTile';
-import styles from './Pages.module.scss';
 
 export default function DashboardPage(): JSX.Element {
   const navigate = useNavigate();
 
   return (
-    <Stack tokens={{ childrenGap: 16 }}>
-      <Stack tokens={{ childrenGap: 6 }}>
-        <Text variant="xLarge">Overview</Text>
-        <Text variant="small" className={styles.muted}>
-          Click any section to route to another page with the same visual language.
-        </Text>
-      </Stack>
+    <div>
+      <div className="fdpPageHeader">
+        <div>
+          <h2 className="fdpH1">Overview</h2>
+          <p className="fdpMuted">Click any section to route to another page with the same layout.</p>
+        </div>
+      </div>
 
-      <div className={styles.grid}>
+      <div className="fdpGrid">
         <AnimatedTile
           title="Funds"
           description="Browse funds, search, and open details."
@@ -42,6 +40,6 @@ export default function DashboardPage(): JSX.Element {
           onClick={() => navigate('/settings')}
         />
       </div>
-    </Stack>
+    </div>
   );
 }

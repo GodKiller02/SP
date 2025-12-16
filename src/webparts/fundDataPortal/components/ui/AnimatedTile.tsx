@@ -1,44 +1,45 @@
 import * as React from 'react';
-import { motion } from 'framer-motion';
-import { Icon, Text, useTheme } from '@fluentui/react';
-import styles from './AnimatedTile.module.scss';
 
 export interface IAnimatedTileProps {
   title: string;
   description: string;
-  iconName: string;
+  iconName: string; // kept for compatibility with existing callers; mapped to an emoji in this refactor
   onClick: () => void;
 }
 
-export default function AnimatedTile(props: IAnimatedTileProps): JSX.Element {
-  const theme = useTheme();
+function iconFor(name: string): string {
+  switch (name) {
+    case 'Financial':
+      return '📊';
+    case 'ReportDocument':
+      return '📄';
+    case 'Send':
+      return '✉️';
+    case 'Settings':
+      return '⚙️';
+    default:
+      return '➡️';
+  }
+}
 
+export default function AnimatedTile(props: IAnimatedTileProps): JSX.Element {
   return (
-    <motion.div
-      className={styles.tile}
+    <div
+      className="fdpCard fdpClickable"
       role="button"
       tabIndex={0}
       onClick={props.onClick}
       onKeyDown={(e) => {
         if (e.key === 'Enter' || e.key === ' ') props.onClick();
       }}
-      whileHover={{ y: -2 }}
-      whileTap={{ scale: 0.98 }}
-      transition={{ duration: 0.15 }}
-      style={{
-        background: theme.palette.white,
-        border: `1px solid ${theme.palette.neutralLight}`
-      }}
     >
-      <div className={styles.header}>
-        <Icon iconName={props.iconName} styles={{ root: { fontSize: 20, color: theme.palette.neutralPrimary } }} />
-        <Text variant="large" className={styles.title}>
-          {props.title}
-        </Text>
+      <div className="fdpTileHeader">
+        <span className="fdpNavIcon" aria-hidden="true">
+          {iconFor(props.iconName)}
+        </span>
+        <p className="fdpTileTitle">{props.title}</p>
       </div>
-      <Text variant="small" className={styles.desc}>
-        {props.description}
-      </Text>
-    </motion.div>
+      <p className="fdpTileDesc">{props.description}</p>
+    </div>
   );
 }

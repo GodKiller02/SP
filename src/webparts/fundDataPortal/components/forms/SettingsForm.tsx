@@ -1,15 +1,5 @@
 import * as React from 'react';
-import { Controller, useForm } from 'react-hook-form';
-import {
-  ChoiceGroup,
-  IChoiceGroupOption,
-  MessageBar,
-  MessageBarType,
-  Slider,
-  Stack,
-  Toggle
-} from '@fluentui/react';
-import AnimatedPrimaryButton from '../ui/AnimatedPrimaryButton';
+import { useForm } from 'react-hook-form';
 
 export interface ISettingsValues {
   density: 'Comfortable' | 'Compact';
@@ -17,16 +7,14 @@ export interface ISettingsValues {
   itemsPerPage: number;
 }
 
-const DENSITY_OPTIONS: IChoiceGroupOption[] = [
-  { key: 'Comfortable', text: 'Comfortable' },
-  { key: 'Compact', text: 'Compact' }
-];
+const DENSITY_OPTIONS: Array<ISettingsValues['density']> = ['Comfortable', 'Compact'];
 
 export default function SettingsForm(): JSX.Element {
   const {
-    control,
+    register,
     handleSubmit,
-    formState: { isSubmitting }
+    formState: { isSubmitting },
+    watch
   } = useForm<ISettingsValues>({
     defaultValues: {
       density: 'Comfortable',
@@ -36,6 +24,7 @@ export default function SettingsForm(): JSX.Element {
   });
 
   const [saved, setSaved] = React.useState(false);
+  const itemsPerPage = watch('itemsPerPage');
 
   const onSubmit = async (): Promise<void> => {
     setSaved(false);
@@ -45,46 +34,54 @@ export default function SettingsForm(): JSX.Element {
   };
 
   return (
-    <Stack tokens={{ childrenGap: 12 }}>
-      {saved && (
-        <MessageBar messageBarType={MessageBarType.success} isMultiline={false} onDismiss={() => setSaved(false)}>
-          Settings saved (demo).
-        </MessageBar>
-      )}
+    <form onSubmit={handleSubmit(onSubmit)}>
+      {saved && <div className="fdpToast">Settings saved (demo).</div>}
 
-      <Controller
-        name="density"
-        control={control}
-        render={({ field }) => (
-          <ChoiceGroup label="Layout density" selectedKey={field.value} options={DENSITY_OPTIONS} onChange={(_, o) => field.onChange(o?.key)} />
-        )}
-      />
+      <div className="fdpSpacer12" />
 
-      <Controller
-        name="emailNotifications"
-        control={control}
-        render={({ field }) => (
-          <Toggle label="Email notifications" checked={field.value} onChange={(_, v) => field.onChange(Boolean(v))} onText="On" offText="Off" />
-        )}
-      />
+      <div className="fdpField">
+        <span className="fdpLabel">Layout density</span>
+        <div className="fdpRow">
+          {DENSITY_OPTIONS.map((d) => (
+            <label key={d} className="fdpBtn fdpRadioPill">
+              <input type="radio" value={d} {...register('density')} />
+              {d}
+            </label>
+          ))}
+        </div>
+      </div>
 
-      <Controller
-        name="itemsPerPage"
-        control={control}
-        render={({ field }) => (
-          <Slider
-            label="Items per page"
-            min={10}
-            max={100}
-            step={5}
-            value={field.value}
-            showValue
-            onChange={(v) => field.onChange(v)}
-          />
-        )}
-      />
+      <div className="fdpSpacer12" />
 
-      <AnimatedPrimaryButton text={isSubmitting ? 'Saving…' : 'Save'} disabled={isSubmitting} onClick={handleSubmit(onSubmit)} />
-    </Stack>
+      <div className="fdpField">
+        <span className="fdpLabel">Email notifications</span>
+        <label className="fdpRadioPill">
+          <input type="checkbox" {...register('emailNotifications')} /> Enabled
+        </label>
+      </div>
+
+      <div className="fdpSpacer12" />
+
+      <div className="fdpField">
+        <label className="fdpLabel" htmlFor="itemsPerPage">
+          Items per page: <b>{itemsPerPage}</b>
+        </label>
+        <input
+          id="itemsPerPage"
+          className="fdpRange"
+          type="range"
+          min={10}
+          max={100}
+          step={5}
+          {...register('itemsPerPage', { valueAsNumber: true })}
+        />
+      </div>
+
+      <div className="fdpSpacer12" />
+
+      <button type="submit" className="fdpBtn fdpBtnPrimary" disabled={isSubmitting}>
+        {isSubmitting ? 'Saving…' : 'Save'}
+      </button>
+    </form>
   );
 }

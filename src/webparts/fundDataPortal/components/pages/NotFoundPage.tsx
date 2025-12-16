@@ -1,18 +1,20 @@
 import * as React from 'react';
-import { DefaultButton, Stack, Text } from '@fluentui/react';
 import { useNavigate } from 'react-router-dom';
-import styles from './Pages.module.scss';
 
 export default function NotFoundPage(): JSX.Element {
   const navigate = useNavigate();
 
   return (
-    <Stack tokens={{ childrenGap: 12 }}>
-      <Text variant="xLarge">Page not found</Text>
-      <Text variant="small" className={styles.muted}>
-        This route doesn’t exist in the demo portal.
-      </Text>
-      <DefaultButton text="Go to Dashboard" onClick={() => navigate('/')} />
-    </Stack>
+    <div>
+      <div className="fdpPageHeader">
+        <div>
+          <h2 className="fdpH1">Page not found</h2>
+          <p className="fdpMuted">This route doesn’t exist in the demo portal.</p>
+        </div>
+      </div>
+      <button type="button" className="fdpBtn fdpBtnPrimary" onClick={() => navigate('/')}>
+        Go to Dashboard
+      </button>
+    </div>
   );
 }

@@ -1,22 +1,20 @@
 import * as React from 'react';
-import { Stack, Text } from '@fluentui/react';
 import SurfaceCard from '../ui/SurfaceCard';
 import SettingsForm from '../forms/SettingsForm';
-import styles from './Pages.module.scss';
 
 export default function SettingsPage(): JSX.Element {
   return (
-    <Stack tokens={{ childrenGap: 14 }}>
-      <Stack tokens={{ childrenGap: 6 }}>
-        <Text variant="xLarge">Settings</Text>
-        <Text variant="small" className={styles.muted}>
-          Demo settings form with the same design system and responsive layout.
-        </Text>
-      </Stack>
+    <div>
+      <div className="fdpPageHeader">
+        <div>
+          <h2 className="fdpH1">Settings</h2>
+          <p className="fdpMuted">Demo settings form using react-hook-form (plain inputs).</p>
+        </div>
+      </div>
 
       <SurfaceCard>
         <SettingsForm />
       </SurfaceCard>
-    </Stack>
+    </div>
   );
 }

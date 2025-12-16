@@ -11,13 +11,11 @@
     "lint": "gulp lint"
   },
   "dependencies": {
-    "@fluentui/react": "^8.124.2",
     "@microsoft/sp-core-library": "1.18.2",
     "@microsoft/sp-lodash-subset": "1.18.2",
     "@microsoft/sp-office-ui-fabric-core": "1.18.2",
     "@microsoft/sp-property-pane": "1.18.2",
     "@microsoft/sp-webpart-base": "1.18.2",
-    "framer-motion": "^11.0.0",
     "react": "17.0.2",
     "react-dom": "17.0.2",
     "react-hook-form": "^7.51.0",

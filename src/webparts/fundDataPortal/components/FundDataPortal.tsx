@@ -1,14 +1,13 @@
 import * as React from 'react';
-import { initializeIcons, ThemeProvider } from '@fluentui/react';
 import type { IFundDataPortalProps } from './IFundDataPortalProps';
 import AppRouter from './AppRouter';
 
-initializeIcons();
+import '../styles/fundDataPortal.css';
 
 export default function FundDataPortal(props: IFundDataPortalProps): JSX.Element {
   return (
-    <ThemeProvider>
+    <div className="fdpRoot">
       <AppRouter title={props.title} />
-    </ThemeProvider>
+    </div>
   );
 }

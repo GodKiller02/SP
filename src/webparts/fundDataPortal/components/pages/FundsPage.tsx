@@ -1,24 +1,10 @@
 import * as React from 'react';
-import { Dropdown, IDropdownOption, SearchBox, Stack, Text } from '@fluentui/react';
 import { useNavigate } from 'react-router-dom';
 import { DEMO_FUNDS, IFund } from '../../data/demoData';
 import FundCard from '../ui/FundCard';
-import styles from './Pages.module.scss';
 
-const CATEGORY_OPTIONS: IDropdownOption[] = [
-  { key: 'All', text: 'All categories' },
-  { key: 'Equity', text: 'Equity' },
-  { key: 'Fixed Income', text: 'Fixed Income' },
-  { key: 'Balanced', text: 'Balanced' },
-  { key: 'Alternatives', text: 'Alternatives' }
-];
-
-const RISK_OPTIONS: IDropdownOption[] = [
-  { key: 'All', text: 'All risk levels' },
-  { key: 'Low', text: 'Low' },
-  { key: 'Medium', text: 'Medium' },
-  { key: 'High', text: 'High' }
-];
+const CATEGORY_OPTIONS = ['All', 'Equity', 'Fixed Income', 'Balanced', 'Alternatives'] as const;
+const RISK_OPTIONS = ['All', 'Low', 'Medium', 'High'] as const;
 
 export default function FundsPage(): JSX.Element {
   const navigate = useNavigate();
@@ -38,48 +24,71 @@ export default function FundsPage(): JSX.Element {
   }, [q, category, risk]);
 
   return (
-    <Stack tokens={{ childrenGap: 14 }}>
-      <Stack tokens={{ childrenGap: 6 }}>
-        <Text variant="xLarge">Funds</Text>
-        <Text variant="small" className={styles.muted}>
-          Demo fund list. Click a card to route to Fund Details.
-        </Text>
-      </Stack>
+    <div>
+      <div className="fdpPageHeader">
+        <div>
+          <h2 className="fdpH1">Funds</h2>
+          <p className="fdpMuted">Demo fund list. Click a card to open Fund Details.</p>
+        </div>
+      </div>
 
-      <Stack horizontal wrap tokens={{ childrenGap: 12 }}>
-        <SearchBox
-          placeholder="Search funds"
-          styles={{ root: { width: 320, maxWidth: '100%' } }}
-          onChange={(_, v) => setQ(v || '')}
-          value={q}
-        />
-        <Dropdown
-          label="Category"
-          selectedKey={category}
-          options={CATEGORY_OPTIONS}
-          onChange={(_, opt) => setCategory(String(opt?.key || 'All'))}
-          styles={{ root: { width: 220, maxWidth: '100%' } }}
-        />
-        <Dropdown
-          label="Risk"
-          selectedKey={risk}
-          options={RISK_OPTIONS}
-          onChange={(_, opt) => setRisk(String(opt?.key || 'All'))}
-          styles={{ root: { width: 220, maxWidth: '100%' } }}
-        />
-      </Stack>
+      <div className="fdpRow">
+        <div className="fdpField">
+          <label className="fdpLabel" htmlFor="fundSearch">
+            Search
+          </label>
+          <input
+            id="fundSearch"
+            className="fdpInput"
+            placeholder="Search funds"
+            value={q}
+            onChange={(e) => setQ(e.target.value)}
+          />
+        </div>
 
-      <div className={styles.cardGrid}>
+        <div className="fdpField">
+          <label className="fdpLabel" htmlFor="fundCategory">
+            Category
+          </label>
+          <select
+            id="fundCategory"
+            className="fdpSelect"
+            value={category}
+            onChange={(e) => setCategory(e.target.value)}
+          >
+            {CATEGORY_OPTIONS.map((c) => (
+              <option key={c} value={c}>
+                {c === 'All' ? 'All categories' : c}
+              </option>
+            ))}
+          </select>
+        </div>
+
+        <div className="fdpField">
+          <label className="fdpLabel" htmlFor="fundRisk">
+            Risk
+          </label>
+          <select id="fundRisk" className="fdpSelect" value={risk} onChange={(e) => setRisk(e.target.value)}>
+            {RISK_OPTIONS.map((r) => (
+              <option key={r} value={r}>
+                {r === 'All' ? 'All risk levels' : r}
+              </option>
+            ))}
+          </select>
+        </div>
+      </div>
+
+      <div className="fdpSpacer12" />
+
+      <div className="fdpCardGrid">
         {filtered.map((fund) => (
           <FundCard key={fund.id} fund={fund} onOpen={(id) => navigate(`/funds/${id}`)} />
         ))}
       </div>
 
       {filtered.length === 0 && (
-        <Text variant="small" className={styles.muted}>
-          No funds match your filters.
-        </Text>
+        <p className="fdpMuted">No funds match your filters.</p>
       )}
-    </Stack>
+    </div>
   );
 }
