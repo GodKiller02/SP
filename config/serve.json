@@ -1,0 +1,29 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/core-build/serve.schema.json",
+  "port": 4321,
+  "https": true,
+  "serveConfigurations": {
+    "default": {
+      "pageUrl": "https://{tenantDomain}/_layouts/15/workbench.aspx",
+      "customActions": {
+        "0d4b1c0b-6a6f-4b31-8c10-6b513c0b5c87": {
+          "location": "ClientSideWebPart",
+          "properties": {
+            "title": "Fund Data Portal"
+          }
+        }
+      }
+    },
+    "localWorkbench": {
+      "pageUrl": "https://{tenantDomain}/_layouts/15/workbench.aspx",
+      "customActions": {
+        "0d4b1c0b-6a6f-4b31-8c10-6b513c0b5c87": {
+          "location": "ClientSideWebPart",
+          "properties": {
+            "title": "Fund Data Portal"
+          }
+        }
+      }
+    }
+  }
+}

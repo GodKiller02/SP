@@ -1,0 +1,18 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/spfx-build/config.2.0.schema.json",
+  "version": "2.0",
+  "bundles": {
+    "fund-data-portal-web-part": {
+      "components": [
+        {
+          "entrypoint": "./lib/webparts/fundDataPortal/FundDataPortalWebPart.js",
+          "manifest": "./src/webparts/fundDataPortal/FundDataPortalWebPart.manifest.json"
+        }
+      ]
+    }
+  },
+  "externals": {},
+  "localizedResources": {
+    "FundDataPortalWebPartStrings": "lib/webparts/fundDataPortal/loc/{locale}.js"
+  }
+}
